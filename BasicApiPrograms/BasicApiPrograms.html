@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form{
+            margin: 100px;
+        }
+    </style>
+</head>
+<body>
+    <span id="result"></span>
+    <form class="form" onsubmit="return false;">
+        <input type="number" name="num">
+        <input list="type" name="type">
+            <datalist id="type">
+                <option value="EvenOrOdd">
+                <option value="Fibonacci">
+            </datalist>       
+        <input type="submit" name="submit">
+    </form>
+
+    <script>
+        const login = document.querySelector('input[type="submit"]')
+        var status
+        login.addEventListener('click', ()=>{
+            const data = new FormData(document.querySelector('form'))
+            fetch('http://localhost:7882/Html/BasicApiPrograms.php',{
+                method: 'POST',
+                body: data
+            })
+            .then(res =>{
+                status = res.status
+                return res.text()
+            })
+            .then(data =>{
+                if (status == 200)
+                {
+                    document.getElementById("result").innerHTML = data; 
+                }
+                else{
+                    document.getElementById("result").innerHTML = data; 
+                }
+            })
+            .catch(err => {alert(err)})
+        })
+    </script>
+</body>
+</html>
